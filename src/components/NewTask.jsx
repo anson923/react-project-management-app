@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useState} from "react";
 
 export default function NewTask({onSetTask}){
   const [enteredTask, setEnteredTask] = useState('');

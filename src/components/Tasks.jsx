@@ -1,5 +1,4 @@
 import NewTask from "./NewTask.jsx";
-import {useState} from "react";
 
 export default function Tasks({tasks, onAddTask, onDeleteTask}){
 
@@ -18,14 +17,14 @@ export default function Tasks({tasks, onAddTask, onDeleteTask}){
 
       {tasks.length === 0 && <p className="text-stone-800 my-4">This project does not have any tasks yet.</p>}
       {tasks &&
-      <ul>
+      <ul className="p-4 mt-8 rounded-md bg-stone-100">
         {
           tasks.map(task => {
             return (
-              <div className="w-full flex justify-between my-4" key={task.id}>
-                <li>{task.description}</li>
-                <button className="text-stone-200 hover:text-stone-100 bg-stone-600 hover:bg-stone-500 rounded-md p-1" onClick={() => handleDeleteTask(task.id)}>DELETE</button>
-              </div>
+              <li className="w-full flex justify-between my-4" key={task.id}>
+                <span>{task.description}</span>
+                <button className="text-stone-200 hover:text-red-500 bg-stone-600 hover:bg-stone-500 rounded-md p-1" onClick={() => handleDeleteTask(task.id)}>Clear</button>
+              </li>
             );
           })
         }

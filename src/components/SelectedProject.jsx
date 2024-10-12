@@ -3,7 +3,7 @@ import Tasks from "./Tasks.jsx";
 export default function SelectedProject({project, onDelete, onAddTask, onDeleteTask}){
   const formattedDate = new Date(project.dueDate).toLocaleDateString('en-US', {
     year: 'numeric',
-    month: 'short',
+    month: 'long',
     day: 'numeric'
   });
 
