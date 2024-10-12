@@ -4,14 +4,29 @@ import {useState} from "react";
 import DefaultHomePage from "./components/DefaultHomePage.jsx";
 
 function App() {
-  const [newProjectVisible, setNewProjectVisible] = useState(false);
-  const handleProjectVisible = (isVisible) => {
-    setNewProjectVisible(isVisible);
+  const [projectsState, setProjectsState] = useState({
+    selectedProjectId: undefined,
+    projects: []
+  });
+  const handleStartAddProject = () => {
+    setProjectsState(prevState => {
+      return {
+        ...prevState,
+        selectedProjectId: null,
+      };
+    });
   }
+
+  let content;
+  if(projectsState.selectedProjectId === null)
+    content = <NewProject/>;
+  else if(projectsState.selectedProjectId === undefined)
+    content = <DefaultHomePage onStartAddProject={handleStartAddProject}/>;
+
   return (
     <main className="h-screen my-8 flex gap-8">
-      <ProjectsSidebar addProjectOnClick={() => handleProjectVisible(true)}/>
-      {newProjectVisible ? <NewProject onCancelButtonClicked={() => handleProjectVisible(false)}/> : <DefaultHomePage addProjectOnClick={() => handleProjectVisible(true)}/>}
+      <ProjectsSidebar onStartAddProject={handleStartAddProject}/>
+      {content}
     </main>
 
   );
