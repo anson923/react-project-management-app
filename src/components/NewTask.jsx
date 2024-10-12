@@ -1,24 +1,25 @@
-import {useRef} from "react";
+import {useRef, useState} from "react";
 
 export default function NewTask({onSetTask}){
-  const taskTextRef = useRef(null);
-  const buttonRef = useRef(null);
+  const [enteredTask, setEnteredTask] = useState('');
 
   const handleOnAddTaskClicked = () => {
-    const enteredTask = taskTextRef.current.value;
     if(enteredTask.trim() !== '')
       onSetTask({
         description: enteredTask,
         id: Math.random()
       });
+    setEnteredTask('');
+  }
 
-    buttonRef.current.value = '';
+  const handleChange = (event) => {
+    setEnteredTask(event.target.value);
   }
 
   return(
     <div className="flex items-center gap-4">
-      <input ref={taskTextRef} type="text" className="w-64 px-2 py-1 rounded-sm bg-stone-200"/>
-      <button ref={buttonRef} onClick={handleOnAddTaskClicked} className="text-stone-700 hover:text-stone-900">Add Task</button>
+      <input onChange={handleChange} value={enteredTask} type="text" className="w-64 px-2 py-1 rounded-sm bg-stone-200"/>
+      <button onClick={handleOnAddTaskClicked} className="text-stone-700 hover:text-stone-900">Add Task</button>
     </div>
   );
 }
