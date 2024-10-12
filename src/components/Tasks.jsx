@@ -1,15 +1,14 @@
 import NewTask from "./NewTask.jsx";
 import {useState} from "react";
 
-export default function Tasks(){
-  const [tasks, setTasks] = useState([]);
+export default function Tasks({tasks, onAddTask, onDeleteTask}){
 
   const handleAddTask = (task) => {
-    setTasks(prevState => [...prevState, task])
+    onAddTask(task)
   }
 
   const handleDeleteTask = (id) => {
-    setTasks(prevState => prevState.filter(task => task.id !== id));
+    onDeleteTask(id);
   }
 
   return (
